@@ -5,13 +5,41 @@
 @section Scripts{
     <script>
         // TODO: Écrire votre script
+       $.get("/Home/Partielle", function(data){
+           $("#divPartielle").html(data);
+       });
+
+        function afficherPartielle2() {
+           // 1. Création de l'objet avec les valeurs des inputs
+           let data = {
+               qty : $("#inputNombre").val(),
+               texte : $("#inputTexte").val()
+           };
+
+            // 2. Vérification
+            console.log(data);
+
+            // 3. && 4. Appel AJAX avec data, puis affichage dans la 2e div
+            $.get("/Home/Partielle2", data, function(resultat) {
+                $("#divPartielle2").html(resultat)
+            });
+       };
+
+     
+       
+        
     </script>
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <!--Utiliser ce div pour afficher la 1ere vue partielle-->
-    <div></div>
+    <div id="divPartielle"></div>
     <!--Utiliser ce div pour afficher la 2e vue partielle-->
-    <div></div>
+    <div>
+        <input type="number" id="inputNombre" />
+        <input type="text" id="inputTexte" />        
+        <button type="button" onclick="afficherPartielle2()">Afficher</button>
+        <div id="divPartielle2"></div>
+    </div>
 </div>
